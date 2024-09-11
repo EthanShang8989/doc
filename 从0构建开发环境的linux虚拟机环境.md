@@ -79,7 +79,7 @@ ethanshang@ubuntu2:~/Desktop$ ip a
 sudo su
 apt install build-essential -y
 apt install openssh-server -y
-sudo apt install git curl cmake make gcc lld pkg-config libssl-dev libclang-dev libsqlite3-dev g++ protobuf-compiler vim tmux net-tools htop
+sudo apt install git curl cmake make gcc lld pkg-config libssl-dev libclang-dev libsqlite3-dev g++ protobuf-compiler vim tmux tar net-tools htop
 ```
 
 ### rust
@@ -184,9 +184,22 @@ sudo systemctl enable ssh
 sudo systemctl status ssh
 ```
 
+### 配置ssh
+
+```
+sudo vim /etc/ssh/sshd_config
+
+#修改其中
+PermitRootLogin yes
+PasswordAuthentication no
+
+#
+vim authorized_keys
 
 
 
+sudo systemctl restart ssh
+```
 
 
 
