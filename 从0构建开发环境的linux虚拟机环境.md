@@ -81,7 +81,7 @@ sudo apt update
 
 apt install build-essential -y
 apt install openssh-server -y
-sudo apt install git curl cmake make gcc lld pkg-config libssl-dev libclang-dev libsqlite3-dev g++ protobuf-compiler vim tmux net-tools htop
+sudo apt install git curl cmake make gcc lld pkg-config libssl-dev libclang-dev libsqlite3-dev g++ protobuf-compiler vim tmux tar net-tools htop
 ```
 
 ### rust
@@ -184,29 +184,6 @@ corepack prepare yarn@stable --activate
  ```
 
 
-
-
-
-#### 启动并启用 SSH 服务
-
-启动 SSH 服务并设置为开机自启动：
-
-```
-sudo systemctl start ssh
-sudo systemctl enable ssh
-
-wsl中是
-
-```
-
-#### 确认 SSH 服务运行
-
-检查 SSH 服务是否正常运行：
-
-```
-sudo systemctl status ssh
-```
-
 wsl配置.ssh config
 
 查询wsl ip
@@ -221,6 +198,30 @@ Host wsl
     User root               # 或者使用其他 WSL 用户名
     IdentityFile ~/.ssh/wsl_key
     Port 22
+
+```
+
+
+
+#### 启动并启用 SSH 服务
+
+启动 SSH 服务并设置为开机自启动：
+
+```
+sudo systemctl start ssh
+sudo systemctl enable ssh
+
+wsl中是 sudo service ssh start
+
+
+```
+
+#### 确认 SSH 服务运行
+
+检查 SSH 服务是否正常运行：
+
+```
+sudo systemctl status ssh
 
 ```
 
