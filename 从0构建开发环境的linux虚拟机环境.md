@@ -77,6 +77,8 @@ ethanshang@ubuntu2:~/Desktop$ ip a
 
 ```
 sudo su
+sudo apt update
+
 apt install build-essential -y
 apt install openssh-server -y
 sudo apt install git curl cmake make gcc lld pkg-config libssl-dev libclang-dev libsqlite3-dev g++ protobuf-compiler vim tmux net-tools htop
@@ -161,11 +163,29 @@ corepack enable
 corepack prepare yarn@stable --activate
 ```
 
-### 安装 OpenSSH Server
 
-```
-sudo apt install openssh-server -y
-```
+
+# SSH
+
+## 设置密钥
+
+ ```
+ sudo ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ""
+ sudo ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N ""
+ sudo ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ""
+ 
+ sudo service ssh start
+ sudo service ssh status
+ 把用户添加到验证密钥中
+ mkdir -p ~/.ssh
+ touch ~/.ssh/authorized_keys
+ cat /etc/ssh/ssh_host_rsa_key.pub >> ~/.ssh/authorized_keys
+ 
+ ```
+
+
+
+
 
 #### 启动并启用 SSH 服务
 
@@ -174,6 +194,9 @@ sudo apt install openssh-server -y
 ```
 sudo systemctl start ssh
 sudo systemctl enable ssh
+
+wsl中是
+
 ```
 
 #### 确认 SSH 服务运行
@@ -182,6 +205,23 @@ sudo systemctl enable ssh
 
 ```
 sudo systemctl status ssh
+```
+
+wsl配置.ssh config
+
+查询wsl ip
+
+ ip addr show eth0 | grep inet
+
+ 在host 主机上面添加
+
+```
+Host wsl
+    HostName <WSL_IP>       # 替换为查询到的 WSL IP 地址
+    User root               # 或者使用其他 WSL 用户名
+    IdentityFile ~/.ssh/wsl_key
+    Port 22
+
 ```
 
 
